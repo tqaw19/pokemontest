@@ -2,12 +2,11 @@ import React from "react";
 import { Box, Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useGetPokemonByNameQuery } from "@/app/services/pokemonApi"; // assuming this is the correct import path
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Moves } from "./Moves";
 
 export const Details = () => {
   const { pokemonNameParam } = useParams();
-  const navigate = useNavigate();
   const {
     data: pokemonInfo,
     error,
@@ -39,7 +38,7 @@ export const Details = () => {
             textTransform="uppercase"
             pb="2rem"
           >
-            <ArrowBackIcon mr="1rem" onClick={() => navigate(-1)} />
+            <ArrowBackIcon mr="1rem" />
             {name}
           </Text>
           <Text pt="1rem">{description}</Text>

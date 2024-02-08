@@ -19,17 +19,10 @@ export const pokemonApi = createApi({
               (entry: any) => entry.language.name === "en"
             ).flavor_text;
 
-            const abilities = response.abilities.map(
-              (ability: any) => ability.ability.name
-            );
-
-            const moves = response.moves.map((move: any) => move.move.name);
-
             return {
               name: response.name,
               image: response.sprites.other["official-artwork"]?.front_default,
               description: description,
-              moves: moves,
             };
           });
       },

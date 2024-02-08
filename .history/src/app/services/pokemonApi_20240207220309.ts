@@ -29,7 +29,6 @@ export const pokemonApi = createApi({
               name: response.name,
               image: response.sprites.other["official-artwork"]?.front_default,
               description: description,
-              moves: moves,
             };
           });
       },

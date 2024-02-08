@@ -10,28 +10,22 @@ export const pokemonApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://pokeapi.co/api/v2/" }),
   endpoints: (builder) => ({
     getPokemonByName: builder.query<Pokemon, string>({
-      query: (name) => `pokemon/${name}`,
-      transformResponse: (response) => {
-        return fetch(response.species.url)
-          .then((res) => res.json())
-          .then((speciesData) => {
-            const description = speciesData.flavor_text_entries.find(
-              (entry: any) => entry.language.name === "en"
-            ).flavor_text;
+      query: async (name) => {
+        const pokemonResponse = await fetch(`pokemon/${name}`);
+        const pokemonData = await pokemonResponse.json();
 
-            const abilities = response.abilities.map(
-              (ability: any) => ability.ability.name
-            );
+        const speciesResponse = await fetch(pokemonData.species.url);
+        const speciesData = await speciesResponse.json();
 
-            const moves = response.moves.map((move: any) => move.move.name);
+        const description = speciesData.flavor_text_entries.find(
+          (entry: any) => entry.language.name === "en"
+        ).flavor_text;
 
-            return {
-              name: response.name,
-              image: response.sprites.other["official-artwork"]?.front_default,
-              description: description,
-              moves: moves,
-            };
-          });
+        return {
+          name: pokemonData.name,
+          image: pokemonData.sprites.front_default,
+          description: description,
+        };
       },
     }),
     getPokemonById: builder.query<any, number>({

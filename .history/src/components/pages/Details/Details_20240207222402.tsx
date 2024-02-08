@@ -39,7 +39,7 @@ export const Details = () => {
             textTransform="uppercase"
             pb="2rem"
           >
-            <ArrowBackIcon mr="1rem" onClick={() => navigate(-1)} />
+            <ArrowBackIcon mr="1rem" onClick={} />
             {name}
           </Text>
           <Text pt="1rem">{description}</Text>
