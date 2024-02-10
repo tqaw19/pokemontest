@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Image, Spinner, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useGetPokemonByNameQuery } from "@/app/services/pokemonApi"; // assuming this is the correct import path
 import { useNavigate, useParams } from "react-router-dom";
@@ -29,24 +29,30 @@ export const Details = () => {
     <>
       <Text pb="2rem">Pokemon Details</Text>
 
-      <Flex alignItems="start">
-        <Box display="flex" flexDirection="column">
-          <Text
-            display="flex"
-            alignItems="center"
-            fontSize="xl"
-            fontWeight="bold"
-            textTransform="uppercase"
-            pb="2rem"
+      <Flex>
+        <Box display="flex" flexDirection="column" w="50%">
+          <Button
+            alignSelf="flex-start"
+            leftIcon={<ArrowBackIcon />}
+            variant="outline"
+            onClick={() => navigate("/")}
           >
-            <ArrowBackIcon mr="1rem" onClick={() => navigate(-1)} />
-            {name}
-          </Text>
+            Go Home
+          </Button>
           <Text pt="1rem">{description}</Text>
 
           <Moves moves={moves} />
         </Box>
+
         <Box>
+          <Text
+            fontWeight="bold"
+            fontSize="xl"
+            textTransform="uppercase"
+            textAlign="center"
+          >
+            {name}
+          </Text>
           <Image src={image} alt={name} />
         </Box>
       </Flex>

@@ -32,7 +32,7 @@ export const Home = () => {
         ]}
         gap={6}
       >
-        {pokemonData?.map((pokemon: any, id) => (
+        {pokemonData?.map((pokemon: any) => (
           <PokemonCard key={pokemon.name} {...pokemon} />
         ))}
       </Grid>
